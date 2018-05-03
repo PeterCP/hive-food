@@ -93,9 +93,12 @@ class User extends Authenticatable
      *
      * @return array(
      */
-    public static function getclients()
+    public static function getClients()
     {
-        return User::whereNotIn('email', ['e.alvarez.alcocer@gmail.com','admin@hive.online'])->get();
+        return User::all()->filter(function ($user) {
+            return $user->hasRole('client');
+        });
+        // return User::whereNotIn('email', ['e.alvarez.alcocer@gmail.com','admin@hive.online'])->get();
     }
 
 }

@@ -78,19 +78,19 @@ class AdminController extends Controller
 
     public function prepayments(Request $request){
         $request->user()->authorizeRoles('admin');
-        $data['clients'] = User::all();
+        $data['clients'] = User::getClients();
         return view('admin.prepayments.prepayments', $data);
     }
 
     public function cash(Request $request){
         $request->user()->authorizeRoles('admin');
-        $data['clients'] = User::all();
+        $data['clients'] = User::getClients();
         return view('admin.cash.cash', $data);
     }
 
     public function loyalty(Request $request){
         $request->user()->authorizeRoles('admin');
-        $data['clients'] = User::all();
+        $data['clients'] = User::getClients();
         return view('admin.loyalty.loyalty', $data);
     }
 
@@ -101,7 +101,7 @@ class AdminController extends Controller
 
     public function users(Request $request){
         $request->user()->authorizeRoles('admin');
-        $data['users'] = User::getclients();
+        $data['users'] = User::getClients();
         return view('admin.users.users', $data);
     }
 
