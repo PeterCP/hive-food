@@ -79,3 +79,7 @@ Route::get('admin/cash/add/{id}/{number}', 'PrepaymentController@addCash');
 //Users
 Route::resource('admin/user', 'UserController', ['only' => ['destroy', 'store', 'update']]);
 Route::get('admin/user/edit/{id}', 'UserController@editUser');
+
+//Loyalty
+Route::get('admin/loyalty/redeem/{id}', 'LoyaltyController@redeemLoyaltyPoints');
+Route::get('admin/loyalty/add/{id}/{number}', 'LoyaltyController@addLoyaltyPoints');

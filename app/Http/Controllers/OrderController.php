@@ -88,7 +88,7 @@ class OrderController extends Controller
         $orderItems = array_filter($requestOrderItems, function ($orderItem) {
             if (is_int($orderItem['dish_id']) && is_int($orderItem['quantity'])) {
                 if ($orderItem['dish_id'] > 0 && $orderItem['quantity'] > 0) {
-                    if (count(Dish::find($orderItem['dish_id'])) === 1) {
+                    if (Dish::find($orderItem['dish_id'])) {
                         return true;
                     } else {
                         return false;
@@ -133,6 +133,10 @@ class OrderController extends Controller
             $item->total = $item->subtotal * 1;
             $item->save();
         }
+
+        // Incrementar los puntos de lealtad del usuario.
+        $user->loyalty_points += 1;
+        $user->save();
 
         return $order->toJson();
     }

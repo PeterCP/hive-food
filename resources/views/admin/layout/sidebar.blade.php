@@ -81,14 +81,12 @@
                 </ul>
             </li>
 
-            {{--
             <li>
                 <a href="{{ url('admin/fidelidad') }}">
                     <i class="fa fa-check-circle"></i>
                     <span>Fidelidad</span>
                 </a>
             </li>
-            --}}
 
             <li>
                 <a href="{{ url('admin/estadisticas') }}">

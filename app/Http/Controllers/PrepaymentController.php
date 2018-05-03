@@ -22,7 +22,7 @@ class PrepaymentController extends Controller
         $user = User::find($id);
         $prepayment =  new Prepayment();
 
-        if( count($user) === 1  && $number > 0){
+        if( $user && $number > 0){
             $prepayment->user_id = $user->id;
             $user->prepayments  = $user->prepayments + $number;
             $prepayment->number = $number;
@@ -39,7 +39,7 @@ class PrepaymentController extends Controller
         $user = User::find($id);
         $prepayment =  new Prepayment();
 
-        if( count($user) === 1 && $user->prepayments >= 1){
+        if( $user && $user->prepayments >= 1){
             $prepayment->user_id = $user->id;
             $user->prepayments  = $user->prepayments - 1;
             $prepayment->number = -1;
@@ -65,7 +65,7 @@ class PrepaymentController extends Controller
         $user = User::find($id);
         $cash =  new Cash();
 
-        if( count($user) === 1 && $number > 0){
+        if( $user && $number > 0){
             $cash->user_id = $user->id;
             $user->cash  = $user->cash + $number;
             $cash->number = $number;
@@ -82,7 +82,7 @@ class PrepaymentController extends Controller
         $user = User::find($id);
         $cash =  new Cash();
 
-        if( count($user) === 1 && ($user->cash - $number >= 0) ){
+        if( $user && ($user->cash - $number >= 0) ){
             $cash->user_id = $user->id;
             $user->cash  = $user->cash - $number;
             $cash->number = $number * -1;

@@ -16,6 +16,7 @@ class ComensalController extends Controller
         $request->user()->authorizeRoles(['client']);
         $data['userId']             = $request->user()->id;
         $data['userName']           = $request->user()->name;
+        $data['userPoints']         = $request->user()->loyalty_points;
         $data['getOrdersUrl']       = url("/orders/" . $request->user()->id);
         $data['getMenuUrl']         = url('/menu');
         $data['createNewOrdersUrl'] = url('/order');

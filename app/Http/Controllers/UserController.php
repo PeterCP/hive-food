@@ -28,7 +28,7 @@ class UserController extends Controller
     public function editUser($id)
     {
         $data['user'] = User::find($id);
-        if( count($data['user']) === 1 ){
+        if($data['user']) {
             return view('admin.users.edit', $data);
         } else {
             return abort(404);
@@ -45,17 +45,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'  => 'required|max:80',
-            'email' => 'required|email',
-            'phone' => 'required',
-            //'room'  => 'numeric',
-            'password'  => 'required|max:16'
+            'name'           => 'required|max:80',
+            'email'          => 'required|email',
+            'phone'          => 'required',
+            //'room'           => 'numeric',
+            'password'       => 'required|max:16'
         ]);
 
         $user = new User();
         $user->name  = $request->input('name');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
+        $user->loyalty_points = 0;
 
         if ( $request->input('room') == null){
             $user->room  = 'no existe';
@@ -82,12 +83,15 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        // dd($request->input());
+
         $this->validate($request, [
             'name'  => 'required|max:80',
             'email' => 'required|email',
             'phone' => 'required',
             //'room'  => 'numeric',
-            'password'  => 'max:16'
+            'password'  => 'max:16',
+            'loyalty_points' => 'required|numeric|min:0',
         ]);
 
         $user = User::find($id);
@@ -105,6 +109,8 @@ class UserController extends Controller
             $user->password = bcrypt( $request->input('password') );
         }
 
+        $user->loyalty_points = $request->input('loyalty_points');;
+        
         $user->save();
 
         $role_comensal  = Role::where('name', 'client')->first();

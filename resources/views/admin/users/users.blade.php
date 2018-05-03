@@ -63,6 +63,7 @@
                                         <th>No. Cliente</th>
                                         <th>Nombre</th>
                                         <th>Email</th>
+                                        <th>Puntos</th>
                                         <th>Creado</th>
                                         <th>Editar</th>
                                     </tr>
@@ -73,6 +74,7 @@
                                             <td>{{$users->id}}</td>
                                             <td>{{$users->name}}</td>
                                             <td>{{$users->email}}</td>
+                                            <td>{{$users->loyalty_points}}</td>
                                             <td>{{$users->created_at}}</td>
 
                                             <td style="text-align: center">

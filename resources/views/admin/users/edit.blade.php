@@ -74,24 +74,31 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-12 col-sm-4">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="room">Numero de habitación (opcional)</label>
                                                     <input type="text" class="form-control" name="room" id="room" value="{{ $user->room }}"/>
                                                 </div>
                                             </div>
 
-                                            <div class="col-xs-12 col-sm-4">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="phone">Teléfono</label>
                                                     <input type="tel" class="form-control" required name="phone" id="phone" value="{{ $user->phone }}"/>
                                                 </div>
                                             </div>
 
-                                            <div class="col-xs-12 col-sm-4">
+                                            <div class="col-xs-12 col-sm-6">
                                                 <div class="form-group">
                                                     <label for="password">Contraseña</label>
                                                     <input type="text" class="form-control" name="password" id="password"/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="loyalty_points">Puntos de lealtad</label>
+                                                    <input type="number" class="form-control" name="loyalty_points" id="loyalty_points" value="{{ $user->loyalty_points }}" />
                                                 </div>
                                             </div>
                                         </div>

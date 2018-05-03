@@ -64,6 +64,7 @@
                 csrf_token: '{{ csrf_token() }}',
                 foodPrepayments: {{ $plates }},
                 cashPrepayments: {{ $cash }},
+                loyaltyPoints: {{ $userPoints }},
                 getMenuUrl: '{{ url('menu') }}',
                 getOrdersUrl: '{{ $getOrdersUrl }}',
                 createNewOrdenUrl: '{{ $createNewOrdersUrl }}',
