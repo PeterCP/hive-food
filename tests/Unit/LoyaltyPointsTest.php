@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use App\Http\Controllers\OrderController;
 
 class LoyaltyPointsTest extends TestCase
 {
@@ -33,18 +34,22 @@ class LoyaltyPointsTest extends TestCase
         $points = (int) $user->loyalty_points;
         
         // Set current user.
-        $this->be($user);
+        // $this->be($user);
+
+        $controller = $this->app->make(OrderController::class);
+
+        $controller->incrementLoyaltyPoints($user);
 
         // Call method and assert that its return status.
-        $response = $this->call('POST', '/order', [
-            'orderItems' => [
-                ['dish_id' => 1, 'quantity' => 1]
-            ]
-        ]);
-        $response->assertStatus(200);
+        // $response = $this->call('POST', '/order', [
+        //     'orderItems' => [
+        //         ['dish_id' => 1, 'quantity' => 1]
+        //     ]
+        // ]);
+        // $response->assertStatus(200);
         
         // Get points after ordering.        
-        $user = User::find(3);
+        // $user = User::find(3);
         $newPoints = (int) $user->loyalty_points;
 
         // Assert that points were incremented by 1.

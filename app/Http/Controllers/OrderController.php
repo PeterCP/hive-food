@@ -134,11 +134,16 @@ class OrderController extends Controller
             $item->save();
         }
 
+        $this->incrementLoyaltyPoints($user);
+
+        return $order->toJson();
+    }
+
+    public function incrementLoyaltyPoints($user)
+    {
         // Incrementar los puntos de lealtad del usuario.
         $user->loyalty_points += 1;
         $user->save();
-
-        return $order->toJson();
     }
 
     /**
