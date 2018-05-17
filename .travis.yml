@@ -1,5 +1,22 @@
 language: php
 php:
   - '7.2'
+
+sudo: required
+distro: trusty
+
+addons:
+  chrome: stable
+
 install:
-  - composer install
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+
+before_script:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - php artisan migrate:refresh --seed
+  - php artisan db:seed --class=TestDataSeeder
+  - php artisan serve &
+
+script:
+  - php artisan dusk
+  - vendor/bin/phpunit

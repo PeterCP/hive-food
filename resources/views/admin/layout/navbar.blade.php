@@ -23,7 +23,7 @@
                 <!-- User Account Menu -->
                 <li class="dropdown user user-menu">
                     <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" id="profile-toggle" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
                         <img src="{{ asset('admin_src/admin-lte/dist/img/avatar5.png') }}" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
@@ -48,7 +48,7 @@
                                 --}}
                             </div>
                             <div class="center">
-                                <a href="{{ route('logout') }}" class="btn btn-flat btn-info"
+                                <a id="logout-button" href="{{ route('logout') }}" class="btn btn-flat btn-info"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sessión</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}

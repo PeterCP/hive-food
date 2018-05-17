@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
             if ($request->user()->hasRole('admin')) {
                 return redirect('/admin');
             } else if ($request->user()->hasRole('client') ) {
-                return redirect('/client');
+                return redirect('/comensal');
             }
         }
 

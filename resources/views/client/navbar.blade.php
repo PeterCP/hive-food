@@ -28,9 +28,8 @@
 
                         <!-- Login -->
                         <li class="nav-item form-modal-nav">
-                            <a class="nav-item-child form-modal-login radius-3" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                            <a id="logout-button" class="nav-item-child form-modal-login radius-3" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Cerrar Sesión
                             </a>
                         </li>
