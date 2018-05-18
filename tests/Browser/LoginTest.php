@@ -6,6 +6,7 @@ use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\DuskTestCase;
 use App\User;
+use App\Models\Dish;
 
 class LoginTest extends DuskTestCase
 {
@@ -30,13 +31,15 @@ class LoginTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser
+                ->maximize()
                 ->visit('http://localhost:8000/login')
                 ->waitForText('Login')
                 ->type('#email', $user->email)
                 ->type('#password', 'password')
                 ->click('.login-form button')
                 ->assertPathIs('/comensal')
-                ->assertSee('Bienvenido');
+                ->waitForText("Bienvenido, {$user->name}")
+                ->assertSee("Bienvenido, {$user->name}");
         });
     }
 
@@ -52,6 +55,7 @@ class LoginTest extends DuskTestCase
                 ->waitForText('Bienvenido')
                 ->click('#logout-button')
                 ->assertPathIs('/login')
+                ->waitForText('Login')
                 ->assertSee('Login');
         });
     }
@@ -92,7 +96,29 @@ class LoginTest extends DuskTestCase
                 ->waitForText('Cerrar Sessión')
                 ->click('#logout-button')
                 ->assertPathIs('/login')
+                ->waitForText('Login')
                 ->assertSee('Login');
+        });
+    }
+
+    /**
+     * Dishes should be visible on page.
+     * 
+     * @return void
+     */
+    public function testAdminAddsDishesToMenu()
+    {
+        $user = User::where('email', 'admin@hive.online')->first();
+
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->loginAs($user)
+                ->visit('http://localhost:8000/admin/platillos')
+                ->waitForText('PLATILLOS');
+            
+            $browser->assertSee('Quesadilla');
+            $browser->assertSee('Pollo');
+            $browser->assertSee('Ensalada');
         });
     }
 }
