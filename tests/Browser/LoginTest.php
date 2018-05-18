@@ -52,7 +52,6 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser
-                ->waitForText('Bienvenido')
                 ->click('#logout-button')
                 ->assertPathIs('/login')
                 ->waitForText('Login')
