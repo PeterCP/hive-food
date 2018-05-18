@@ -35,7 +35,8 @@ class LoginTest extends DuskTestCase
                 ->type('#email', $user->email)
                 ->type('#password', 'password')
                 ->click('.login-form button')
-                ->assertPathIs('/comensal');
+                ->assertPathIs('/comensal')
+                ->assertSee('Bienvenido');
         });
     }
 
@@ -50,7 +51,8 @@ class LoginTest extends DuskTestCase
             $browser
                 ->waitForText('Bienvenido')
                 ->click('#logout-button')
-                ->assertPathIs('/login');
+                ->assertPathIs('/login')
+                ->assertSee('Login');
         });
     }
 
@@ -89,7 +91,8 @@ class LoginTest extends DuskTestCase
                 ->click('#profile-toggle')
                 ->waitForText('Cerrar Sessión')
                 ->click('#logout-button')
-                ->assertPathIs('/login');
+                ->assertPathIs('/login')
+                ->assertSee('Login');
         });
     }
 }
