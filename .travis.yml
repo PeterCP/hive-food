@@ -9,7 +9,7 @@ addons:
   chrome: stable
 
 install:
-  - touch database/database.sqlite
+  - touch /tmp/database.sqlite
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
 before_script:
@@ -19,11 +19,10 @@ before_script:
   - ./vendor/laravel/dusk/bin/chromedriver-linux &
 
   # Run application using testing environment
-  - touch /tmp/database.sqlite
   - export APP_ENV=testing
   - php artisan migrate:refresh --seed
   - php artisan db:seed --class=TestDataSeeder
-  - php artisan serve &
+  - php artisan serve > /dev/null &
 
 script:
   - vendor/bin/phpunit
