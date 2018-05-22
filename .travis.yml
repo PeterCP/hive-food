@@ -31,3 +31,9 @@ before_script:
 script:
   - vendor/bin/phpunit
   - php artisan dusk
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: CdO/LDIsRg928d5K5wreO4RcWj9FgV6m8CLo/QFKw1s4ELNS/0umof821kaIQLyzkWo67iCr7HuqeH0mAK14+I3qXSuDhI/pkMKC9kKkF213091c+kSI/UA9mJIJAHfIW890SgUSvhxQvmRmiuFLHSueBavoON1s2vQwYbK+h+z70NIyMPevQEn3cXBH3k1CXbiVFx219EeQEVfNaVfZWORrpE3lC/+HKlPbOPgH/1psMl0uO/kSIbXYiJ3Io0e9nmQBruWjPKtMXQ/PvQs2AVQ1hQEPSkgJr9Kr65Mk1hmw5JPkpdI9ByZPtx/Evu04Rt/2Hc0Js1HPIqM/ZRKdwli9tCdM9VWUBL29/zhh7CrrMp6webWLkMLAN60iiuOCGD2Qzq8mVmUMq1wCb2+MHbmJWa4SOd+hVD8wO2fEEK/Z4NkIqRFwdCS98QfVKv4bLxEP1X0zA5wekAl3cqpSYDHNl4z2PuMNeVb8HnHG9nBzE12s+WoqFZLkrh2j20S9VrXMMlZYnSz3YwRF5XtXoXBchrwOjpHR8mM8gvSrwTBYnAVCxxwyjYuaEg5J/lHixLhtAWoGVe9+5SsegG/h0mUAmdDzD02x8iRn9YWcQI34eLM4Njp8mIkRG0o1PuiLnA1qBXwlTIlKkk5no1i0N7AnVsP9I2+7FR5IxcJyLZk=
+  app: hive-food
