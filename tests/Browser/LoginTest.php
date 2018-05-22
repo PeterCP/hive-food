@@ -3,6 +3,7 @@
 namespace Tests\Browser;
 
 use Laravel\Dusk\Browser;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\DuskTestCase;
 use App\User;
@@ -15,6 +16,7 @@ class LoginTest extends DuskTestCase
     protected function setUp()
     {
         parent::setUp();
+        Artisan::call('migrate:refresh');
         $this->seed('DatabaseSeeder');
         $this->seed('TestDataSeeder');
     }
@@ -31,7 +33,7 @@ class LoginTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser
-                ->maximize()
+                ->resize(1920, 1080)
                 ->visit('http://localhost:8000/login')
                 ->waitForText('Login')
                 ->type('#email', $user->email)
@@ -52,6 +54,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser
+                ->resize(1920, 1080)
                 ->click('#logout-button')
                 ->assertPathIs('/login')
                 ->waitForText('Login')
@@ -69,17 +72,17 @@ class LoginTest extends DuskTestCase
     {
         $user = User::where('email', 'admin@hive.online')->first();
 
-        $this
-            ->browse(function ($browser) use ($user) {
-                $browser
-                    ->visit('http://localhost:8000/login')
-                    ->waitForText('Login')
-                    ->type('#email', $user->email)
-                    ->type('#password', 'weallfit2017')
-                    ->click('.login-form button')
-                    ->waitForText('MENU')
-                    ->assertSee('MENU');
-            });
+        $this->browse(function ($browser) use ($user) {
+            $browser
+                ->resize(1920, 1080)
+                ->visit('http://localhost:8000/login')
+                ->waitForText('Login')
+                ->type('#email', $user->email)
+                ->type('#password', 'weallfit2017')
+                ->click('.login-form button')
+                ->waitForText('MENU')
+                ->assertSee('MENU');
+        });
     }
 
     /**
@@ -91,6 +94,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function ($browser) {
             $browser
+                ->resize(1920, 1080)
                 ->click('#profile-toggle')
                 ->waitForText('Cerrar Sessión')
                 ->click('#logout-button')
@@ -111,13 +115,13 @@ class LoginTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
             $browser
+                ->resize(1920, 1080)
                 ->loginAs($user)
                 ->visit('http://localhost:8000/admin/platillos')
-                ->waitForText('PLATILLOS');
-            
-            $browser->assertSee('Quesadilla');
-            $browser->assertSee('Pollo');
-            $browser->assertSee('Ensalada');
+                ->waitForText('PLATILLOS')
+                ->assertSee('Quesadilla')
+                ->assertSee('Pollo')
+                ->assertSee('Ensalada');
         });
     }
 }
