@@ -59,4 +59,9 @@ class UsersDatabaseTest extends TestCase
             'email' => $user->email
         ]);
     }
+
+    public function testUpdatingUsers()
+    {
+        $this->assertEquals(false, true);
+    }
 }
