@@ -62,6 +62,21 @@ class UsersDatabaseTest extends TestCase
 
     public function testUpdatingUsers()
     {
-        $this->assertEquals(false, true);
+        $user = User::first();
+        $expectedCount = User::count();
+        $expectedPoints = $user->loyalty_point + 5;
+
+        $controller = $this->app->make(UserController::class);
+        $request = Request::create("/admin/user/{$user->id}", 'PUT', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'loyalty_points' => $expectedPoints
+        ]);
+        $controller->update($request, $user->id);
+
+        $user->refresh();
+        $this->assertEquals($expectedPoints, $user->loyalty_points);
+        $this->assertEquals($expectedCount, User::count());
     }
 }
